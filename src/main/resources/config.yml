@@ -1,0 +1,24 @@
+queue:
+  minimum-players: 48
+  maximum-players: 100
+player-numbers:
+  minimum: 2
+  maximum: 456
+lobby:
+  squid-world: squid_lobby
+  normal-return-world: world
+games:
+  rlgl:
+    green-min-seconds: 3
+    green-max-seconds: 7
+    red-min-seconds: 2
+    red-max-seconds: 5
+    movement-tolerance: 0.10
+  nightfight:
+    preparation-seconds: 60
+  tugofwar:
+    minimum-players: 48
+    click-cooldown-ms: 110
+    win-score: 100
+  glassbridge:
+    rows: 12

@@ -1,0 +1,18 @@
+name: SplashhysSG
+version: 2.0.0
+main: com.splashhys.sg.SplashhysSG
+api-version: '1.21'
+author: Splashhys
+description: Full Squid Game event system
+commands:
+  sg:
+    description: Splashhys Squid Game controls
+    usage: /sg
+    aliases: [squidgame]
+permissions:
+  squid.frontman:
+    description: Full Frontman controls
+    default: op
+  squid.guard:
+    description: Guard controls
+    default: op
