@@ -1,4 +1,4 @@
-# Splashhys SG Plugin 2.0.0
+# Splashhys SG Plugin 2.0.1
 
 Paper 1.21.11 / Java 21.
 

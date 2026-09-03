@@ -54,12 +54,12 @@ public final class SplashhysSG extends JavaPlugin implements Listener, CommandEx
     private boolean rlglRed = false;
     private long rlglTransitionUntil = 0;
     private int tugScore = 0;
-    private int rlglTask = -1;
-    private int nightTask = -1;
-    private int tugTask = -1;
-    private int glassTask = -1;
-    private int squidTask = -1;
-    private int dalgonaTask = -1;
+    private BukkitTask rlglTask;
+    private BukkitTask nightTask;
+    private BukkitTask tugTask;
+    private BukkitTask glassTask;
+    private BukkitTask squidTask;
+    private BukkitTask dalgonaTask;
     private UUID currentGlassPlayer;
     private final Map<UUID, SetupSession> setupSessions = new HashMap<>();
     private final NamespacedKey setupKey;
@@ -134,13 +134,13 @@ public final class SplashhysSG extends JavaPlugin implements Listener, CommandEx
     }
 
     private void cancelTasks() {
-        if (rlglTask >= 0) Bukkit.getScheduler().cancelTask(rlglTask);
-        if (nightTask >= 0) Bukkit.getScheduler().cancelTask(nightTask);
-        if (tugTask >= 0) Bukkit.getScheduler().cancelTask(tugTask);
-        if (glassTask >= 0) Bukkit.getScheduler().cancelTask(glassTask);
-        if (squidTask >= 0) Bukkit.getScheduler().cancelTask(squidTask);
-        if (dalgonaTask >= 0) Bukkit.getScheduler().cancelTask(dalgonaTask);
-        rlglTask=nightTask=tugTask=glassTask=squidTask=dalgonaTask=-1;
+        if (rlglTask != null) rlglTask.cancel();
+        if (nightTask != null) nightTask.cancel();
+        if (tugTask != null) tugTask.cancel();
+        if (glassTask != null) glassTask.cancel();
+        if (squidTask != null) squidTask.cancel();
+        if (dalgonaTask != null) dalgonaTask.cancel();
+        rlglTask=nightTask=tugTask=glassTask=squidTask=dalgonaTask=null;
     }
 
     private void clearAllEffects() {
@@ -346,7 +346,7 @@ public final class SplashhysSG extends JavaPlugin implements Listener, CommandEx
         nightTask=Bukkit.getScheduler().runTaskTimer(this,new Runnable(){
             int left=seconds;
             public void run(){
-                if(left<=0){ Bukkit.getScheduler().cancelTask(nightTask); nightTask=-1; lightsOut(); return; }
+                if(left<=0){ nightTask.cancel(); nightTask=null; lightsOut(); return; }
                 if(left<=10 || left%10==0) broadcastTitle("LIGHTS OUT IN",""+left+" SECONDS",ChatColor.YELLOW);
                 left--;
             }
